@@ -1,8 +1,8 @@
 import createIntlMiddleware from "next-intl/middleware";
+import { routing } from "./routing";
 import { NextRequest, NextResponse } from "next/server";
-import { locales, pathnames } from "./navigation";
 
-export default async function middleware(request) {
+export default async function proxy(request) {
   const path = request.nextUrl.pathname;
 
   if (
@@ -17,11 +17,7 @@ export default async function middleware(request) {
   const defaultLocale = "de";
 
   // Step 2: Create and call the next-intl middleware
-  const handleI18nRouting = createIntlMiddleware({
-    locales,
-    defaultLocale,
-    pathnames,
-  });
+  const handleI18nRouting = createIntlMiddleware(routing);
 
   const response = handleI18nRouting(request);
 
