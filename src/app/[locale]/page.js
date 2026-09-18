@@ -1,8 +1,9 @@
-import { unstable_setRequestLocale } from "next-intl/server";
-import { locales } from "@/navigation";
+import { setRequestLocale } from "next-intl/server";
+import { locales } from "@/routing";
 
-export default function Home({ children, params: { locale } }) {
-  unstable_setRequestLocale(locale);
+export default async function Home({ children, params }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
 
   return <>{children}</>;
 }
